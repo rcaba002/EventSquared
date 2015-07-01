@@ -157,7 +157,6 @@ namespace EventSquared.Controllers
                     LastName = model.LastName,
                     UserName = model.Email,
                     Email = model.Email
- 
                 };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
@@ -350,7 +349,7 @@ namespace EventSquared.Controllers
                     // If the user does not have an account, then prompt the user to create an account
                     ViewBag.ReturnUrl = returnUrl;
                     ViewBag.LoginProvider = loginInfo.Login.LoginProvider;
-                    return View("ExternalLoginConfirmation", new ExternalLoginConfirmationViewModel { UserName = loginInfo.Email });
+                    return View("ExternalLoginConfirmation", new ExternalLoginConfirmationViewModel { Email = loginInfo.Email });
             }
         }
 
@@ -374,7 +373,11 @@ namespace EventSquared.Controllers
                 {
                     return View("ExternalLoginFailure");
                 }
-                var user = new ApplicationUser { UserName = model.UserName, Email = model.UserName };
+                var user = new ApplicationUser()
+                { 
+                    UserName = model.Email, 
+                    Email = model.Email 
+                };
                 var result = await UserManager.CreateAsync(user);
                 if (result.Succeeded)
                 {

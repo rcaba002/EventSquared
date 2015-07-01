@@ -12,9 +12,16 @@
             @{
                 var manager = new UserManager<ApplicationUser>(new Microsoft.AspNet.Identity.EntityFramework.UserStore<ApplicationUser>(new ApplicationDbContext()));
                 var user = manager.FindById(User.Identity.GetUserId());
-            }
 
-            @Html.ActionLink("Hello " + user.FirstName + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+                if (user.FirstName != null)
+                {
+                    @Html.ActionLink("Hello " + user.FirstName + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+                }
+                else
+                {
+                    @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+                }
+             } 
         </li>
         <li><a href="javascript:document.getElementById('logoutForm').submit()">Log out</a></li>
     </ul>

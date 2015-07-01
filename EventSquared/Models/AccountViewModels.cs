@@ -6,8 +6,9 @@ namespace EventSquared.Models
     public class ExternalLoginConfirmationViewModel
     {
         [Required]
-        [Display(Name = "User Name")]
-        public string UserName { get; set; }
+        [Display(Name = "Email")]
+        [EmailAddress]
+        public string Email { get; set; }
     }
 
     public class ExternalLoginListViewModel
