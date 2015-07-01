@@ -25,7 +25,10 @@ namespace EventSquared.Migrations
             {
                 var user = new ApplicationUser()
                 {
-                    UserName = string.Format("User{0}", i.ToString())
+                    FirstName = string.Format("FirstName{0}", i.ToString()),
+                    LastName = string.Format("LastName{0}", i.ToString()),
+                    UserName = string.Format("User{0}", i.ToString()),
+                    Email = string.Format("Email{0}@Example.com", i.ToString())
                 };
                 manager.Create(user, string.Format("Password{0}", i.ToString()));
             }
