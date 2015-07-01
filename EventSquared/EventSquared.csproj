@@ -164,9 +164,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201507010750392_Init.cs" />
-    <Compile Include="Migrations\201507010750392_Init.Designer.cs">
-      <DependentUpon>201507010750392_Init.cs</DependentUpon>
+    <Compile Include="Migrations\201507012050284_Init.cs" />
+    <Compile Include="Migrations\201507012050284_Init.Designer.cs">
+      <DependentUpon>201507012050284_Init.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -215,8 +215,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
@@ -251,8 +249,8 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201507010750392_Init.resx">
-      <DependentUpon>201507010750392_Init.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201507012050284_Init.resx">
+      <DependentUpon>201507012050284_Init.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
