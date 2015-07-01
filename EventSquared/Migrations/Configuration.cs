@@ -27,7 +27,7 @@ namespace EventSquared.Migrations
                 {
                     FirstName = string.Format("FirstName{0}", i.ToString()),
                     LastName = string.Format("LastName{0}", i.ToString()),
-                    UserName = string.Format("User{0}", i.ToString()),
+                    UserName = string.Format("Email{0}@Example.com", i.ToString()),
                     Email = string.Format("Email{0}@Example.com", i.ToString()),
 
                 };
