@@ -35,6 +35,7 @@ textarea {
     right: 0;
     left: 0;
     background-color: #EDEDED;
+    color: dimgray;
 }
 
 .footerdiv hr {
@@ -65,18 +66,23 @@ textarea {
     margin-bottom: 12pt;
     font-size: 30pt;
     text-align: center;
-    color: #428bca;
+    color: #D3622A;
+}
+
+.navbar-inverse .navbar-toggle .icon-bar {
+    background-color: dimgray;
+    height: 3px;
 }
 
 .login-col-8 {
-  width: 310px;
-  height: 327px;
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  margin: auto;
+    width: 310px;
+    height: 327px;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
 }
 
 .login-col-10 {
@@ -84,17 +90,17 @@ textarea {
 }
 
 .col-md-offset-2 {
-    margin-left: 0!important;
+    margin-left: 0 !important;
     width: 232pt;
     line-height: 33px;
 }
 
-.col-md-offset-2 .checkbox {
-    padding-top: 0;
-}
+    .col-md-offset-2 .checkbox {
+        padding-top: 0;
+    }
 
 .checkbox input[type="checkbox"] {
-  margin-top: 10px;
+    margin-top: 10px;
 }
 
 .facebookbutton {
@@ -105,12 +111,25 @@ textarea {
     height: 34px;
 }
 
+.facebookbutton:focus {
+      line-height: 36px;
+}
+
 .login-col-8 .btn-default {
     float: right;
 }
 
 .forgotpass {
     float: right;
+    color: #3B5998;
+}
+
+.forgotpass:hover {
+    color: #3B5998;
+}
+
+.forgotpass:focus {
+    outline: 0;
 }
 
 button:focus {
@@ -119,9 +138,42 @@ button:focus {
 
 .btn-login {
     width: 100%;
-    background-color: ghostwhite;
+    background-color: dimgray;
+    color: azure;
 }
 
-.btn-login:hover {
-    background-color: ghostwhite;
+    .btn-login:hover {
+        background-color: dimgray;
+        color: azure;
+    }
+
+    .btn-login:focus {
+        background-color: grey;
+        color: azure;
+        outline: 0;
+    }
+
+.navbar-brand {
+    color: #D3622A;
+}
+
+.navbar-brand:hover {
+    color: #D3622A !important;
+}
+
+.navbar-nav li > a {
+    color: #3B5998;
+}
+
+.navbar-nav li > a:hover {
+    color: #D3622A !important;
+}
+
+@media (max-width: 767px) {
+    .nav > li:hover {
+        background-color: #3B5998;
+    }
+    .nav > li > a:hover {
+        color: azure !important;
+    }
 }

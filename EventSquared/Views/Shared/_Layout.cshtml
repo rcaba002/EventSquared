@@ -19,7 +19,7 @@
                 </button>
                 @if (Context.User.Identity.IsAuthenticated)
                 {
-                    @Html.ActionLink("Event²", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                    @Html.ActionLink("Event²", "Dashboard", "Home", new { area = "" }, new { @class = "navbar-brand" })
                 }
                 else
                 {
@@ -30,7 +30,7 @@
                 <ul class="nav navbar-nav">
                     @if (Context.User.Identity.IsAuthenticated)
                     {
-                        <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                        <li>@Html.ActionLink("Events", "Create", "Events")</li>
                     }
                 </ul>
                 @Html.Partial("_LoginPartial")
