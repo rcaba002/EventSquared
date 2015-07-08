@@ -8,7 +8,7 @@ namespace EventSquared.Models
         [Required]
         [Display(Name = "Email")]
         [EmailAddress]
-        public string Email { get; set; }
+        public string UserName { get; set; }
     }
 
     public class ExternalLoginListViewModel
@@ -59,7 +59,7 @@ namespace EventSquared.Models
         [Display(Name = "Password")]
         public string Password { get; set; }
 
-        [Display(Name = "Remember me?")]
+        [Display(Name = "Remember me")]
         public bool RememberMe { get; set; }
     }
 
@@ -72,9 +72,6 @@ namespace EventSquared.Models
         [Required]
         [Display(Name = "Last name")]
         public string LastName { get; set; }
-
-        [Display(Name = "User name")]
-        public string UserName { get; set; }
 
         [Required]
         [EmailAddress]

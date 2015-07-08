@@ -29,7 +29,7 @@ namespace EventSquared.Migrations
                     LastName = string.Format("LastName{0}", i.ToString()),
                     UserName = string.Format("Email{0}@Example.com", i.ToString()),
                     Email = string.Format("Email{0}@Example.com", i.ToString()),
-
+                    EmailConfirmed = true
                 };
                 manager.Create(user, string.Format("Password{0}", i.ToString()));
             }
