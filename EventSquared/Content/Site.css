@@ -25,7 +25,7 @@ textarea {
 }
 
 .footerdiv {
-    position: relative;
+    position: fixed;
     bottom: 0;
     text-align: center;
     padding-right: 15px;
@@ -77,6 +77,17 @@ textarea {
 .login-col-8 {
     width: 310px;
     height: 327px;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+
+.signup-col-8 {
+    width: 310px;
+    height: 410px;
     position: absolute;
     top: 0;
     bottom: 0;
@@ -175,5 +186,30 @@ button:focus {
     }
     .nav > li > a:hover {
         color: azure !important;
+    }
+}
+
+.agreeterms {
+    text-align: center;
+    font-size: 12px;
+    padding-right: 10px;
+    padding-left: 10px;
+    color: dimgray;
+}
+
+@media (max-width: 767px) {
+    .signup-col-8 {
+        position: relative !important;
+        height: 470px;
+    }
+    .login-col-8 {
+        position: relative !important;
+        height: 337px;
+    }
+    .footerdiv {
+        position: relative !important;
+    }
+    .loginHeader {
+        margin-top: 25px;
     }
 }

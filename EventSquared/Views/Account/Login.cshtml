@@ -4,11 +4,6 @@
     ViewBag.Title = "Log in here";
 }
 
-<head>
-    <title>Event² - @ViewBag.Title</title>
-    @Styles.Render("~/Content/logincss.css")
-</head>
-
 <div class="row">
     <div class="col-md-8 login-col-8">
         <div class="loginHeader">@ViewBag.Title.</div>
@@ -49,6 +44,7 @@
         @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
     </div>
 </div>
+
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
