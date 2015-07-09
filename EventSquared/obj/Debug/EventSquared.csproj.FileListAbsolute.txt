@@ -54,6 +54,6 @@ C:\Work\EventSquared\EventSquared\obj\Debug\EventSquared.dll
 C:\Work\EventSquared\EventSquared\obj\Debug\EventSquared.pdb
 C:\Work\EventSquared\EventSquared\bin\SendGrid.SmtpApi.dll
 C:\Work\EventSquared\EventSquared\bin\SendGridMail.dll
-C:\Work\EventSquared\EventSquared\obj\Debug\EventSquared.Migrations.Init.resources
+C:\Work\EventSquared\EventSquared\obj\Debug\EventSquared.Migrations.init.resources
 C:\Work\EventSquared\EventSquared\obj\Debug\EventSquared.csproj.GenerateResource.Cache
 C:\Work\EventSquared\EventSquared\obj\Debug\EventSquared.csprojResolveAssemblyReference.cache

@@ -41,10 +41,6 @@ namespace EventSquared.Models
 
         public DbSet<Square> Squares { get; set; }
 
-        public DbSet<GiftRegistry> GiftRegistries { get; set; }
-
-        public DbSet<Gift> Gifts { get; set; }
-
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();

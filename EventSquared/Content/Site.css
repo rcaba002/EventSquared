@@ -38,8 +38,7 @@ textarea {
     color: dimgray;
 }
 
-.footerdiv hr {
-    border: 0;
+hr {
     border-top: 1px solid #DBDBDB;
 }
 
@@ -211,5 +210,14 @@ button:focus {
     }
     .loginHeader {
         margin-top: 25px;
+    }
+    .hello-visibility {
+        display: none !important;
+    }
+}
+
+@media (min-width: 768px) {
+    .item-visibility {
+        display: none !important;
     }
 }

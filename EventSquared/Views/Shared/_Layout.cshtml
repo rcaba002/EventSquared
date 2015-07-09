@@ -30,7 +30,10 @@
                 <ul class="nav navbar-nav">
                     @if (Context.User.Identity.IsAuthenticated)
                     {
-                        <li>@Html.ActionLink("Events", "Create", "Events")</li>
+                        <li>@Html.ActionLink("Create New Event", "Create", "Events")</li>
+                        <li>@Html.ActionLink("Manage My Events", "All", "Events")</li>
+                        <li>@Html.ActionLink("My Dashboard", "Dashboard", "Home", new { area = "" }, new { @class = "item-visibility" })</li>
+                        <li>@Html.ActionLink("Update Settings", "Settings", "Manage", new { area = "" }, new { @class = "item-visibility" })</li>
                     }
                 </ul>
                 @Html.Partial("_LoginPartial")

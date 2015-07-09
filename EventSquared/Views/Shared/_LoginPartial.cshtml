@@ -15,11 +15,11 @@
 
                 if (user.FirstName != null)
                 {
-                    @Html.ActionLink("Hello " + user.FirstName + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+                    @Html.ActionLink("Hello " + user.FirstName + "!", "Settings", "Manage", routeValues: null, htmlAttributes: new { title = "Settings", @class = "hello-visibility" })
                 }
                 else
                 {
-                    @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+                    @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Settings", "Manage", routeValues: null, htmlAttributes: new { title = "Settings", @class = "hello-visibility" })
                 }
              } 
         </li>
