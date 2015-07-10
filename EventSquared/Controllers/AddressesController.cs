@@ -12,122 +12,113 @@ using Microsoft.AspNet.Identity;
 
 namespace EventSquared.Controllers
 {
-    public class EventsController : Controller
+    public class AddressesController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: Events
-        public async Task<ActionResult> All()
+        // GET: Addresses
+        public async Task<ActionResult> Index()
         {
-            var events = db.Events.Include(@event => @event.Address).Include(@event => @event.ApplicationUser);
-            return View(await events.ToListAsync());
+            return View(await db.Addresses.ToListAsync());
         }
 
-        // GET: Events/Details/5
+        // GET: Addresses/Details/5
         public async Task<ActionResult> Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Event @event = await db.Events.FindAsync(id);
-            if (@event == null)
+            Address address = await db.Addresses.FindAsync(id);
+            if (address == null)
             {
                 return HttpNotFound();
             }
-            return View(@event);
+            return View(address);
         }
 
-        // GET: Events/Create
+        // GET: Addresses/Create
         public ActionResult Create()
         {
-            ViewBag.AddressId = new SelectList(db.Addresses, "Id", "Street");
-            ViewBag.ApplicationUserId = new SelectList(db.Users, "Id", "FirstName");
             return View();
         }
 
-        // POST: Events/Create
+        // POST: Addresses/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "Id,Title,StartDate,Description,AddressId,ApplicationUserId")] Event @event)
+        public async Task<ActionResult> Create([Bind(Include = "Id,Street,City,State,ZipCode")] Address address)
         {
             if (ModelState.IsValid)
             {
                 var userId = User.Identity.GetUserId();
 
-                @event.ApplicationUserId = userId;
+                var user = db.Users.Find(userId);
 
-                db.Events.Add(@event);
+                user.Address = address;
                 await db.SaveChangesAsync();
-                return RedirectToAction("All");
+                return RedirectToAction("Index");
             }
 
-            ViewBag.AddressId = new SelectList(db.Addresses, "Id", "Street", @event.AddressId);
-            ViewBag.ApplicationUserId = new SelectList(db.Users, "Id", "FirstName", @event.ApplicationUserId);
-            return View(@event);
+            return View(address);
         }
 
-        // GET: Events/Edit/5
+        // GET: Addresses/Edit/5
         public async Task<ActionResult> Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Event @event = await db.Events.FindAsync(id);
-            if (@event == null)
+            Address address = await db.Addresses.FindAsync(id);
+            if (address == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.AddressId = new SelectList(db.Addresses, "Id", "Street", @event.AddressId);
-            ViewBag.ApplicationUserId = new SelectList(db.Users, "Id", "FirstName", @event.ApplicationUserId);
-            return View(@event);
+            return View(address);
         }
 
-        // POST: Events/Edit/5
+        // POST: Addresses/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "Id,Title,StartDate,Description,AddressId,ApplicationUserId")] Event @event)
+        public async Task<ActionResult> Edit([Bind(Include = "Id,Street,City,State,ZipCode")] Address address)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(@event).State = EntityState.Modified;
+                db.Entry(address).State = EntityState.Modified;
                 await db.SaveChangesAsync();
-                return RedirectToAction("All");
+                return RedirectToAction("Index");
             }
-            ViewBag.AddressId = new SelectList(db.Addresses, "Id", "Street", @event.AddressId);
-            ViewBag.ApplicationUserId = new SelectList(db.Users, "Id", "FirstName", @event.ApplicationUserId);
-            return View(@event);
+            return View(address);
         }
 
-        // GET: Events/Delete/5
+        // GET: Addresses/Delete/5
         public async Task<ActionResult> Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Event @event = await db.Events.FindAsync(id);
-            if (@event == null)
+            Address address = await db.Addresses.FindAsync(id);
+            if (address == null)
             {
                 return HttpNotFound();
             }
-            return View(@event);
+            return View(address);
         }
 
-        // POST: Events/Delete/5
+        // POST: Addresses/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
-            Event @event = await db.Events.FindAsync(id);
-            db.Events.Remove(@event);
+            Address address = await db.Addresses.FindAsync(id);
+            db.Addresses.Remove(address);
             await db.SaveChangesAsync();
-            return RedirectToAction("All");
+            return RedirectToAction("Index");
         }
 
         protected override void Dispose(bool disposing)

@@ -9,7 +9,7 @@ namespace EventSquared.Models
 {
     public class Address
     {
-        public int AddressId { get; private set; }
+        public int Id { get; private set; }
 
         [MaxLength(100)]
         [Required]

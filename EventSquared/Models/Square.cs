@@ -9,7 +9,7 @@ namespace EventSquared.Models
 {
     public class Square
     {
-        public int SquareId { get; set; }
+        public int Id { get; set; }
 
         [Required]
         public string Title { get; set; }
@@ -31,5 +31,8 @@ namespace EventSquared.Models
 
         [Description]
         public string Description { get; set; }
+
+        public int EventId { get; set; }
+        public virtual Event Event { get; set; }
     }
 }

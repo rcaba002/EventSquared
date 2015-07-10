@@ -15,9 +15,10 @@ namespace EventSquared.Models
 
         public string LastName { get; set; }
 
-        public Address Address { get; set; }
+        public int? AddressId { get; set; }
+        public virtual Address Address { get; set; }
 
-        public ICollection<Event> Events { get; set; }
+        public virtual ICollection<Event> Events { get; set; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
