@@ -78,27 +78,19 @@ namespace EventSquared.Controllers
             {
                 return HttpNotFound();
             }
-            detailsViewModel myViewModel = null;
 
-            if (User.Identity.GetUserId() == @event.ApplicationUserId)
+            var myViewModel = new detailsViewModel
             {
-                myViewModel = new detailsViewModel
-                {
-                    StartDate = @event.StartDate,
-                    Title = @event.Title,
-                    Description = @event.Description,
-                    ApplicationUserId = User.Identity.GetUserId(),
-                    AddressId = @event.Address.Id,
-                    Street = @event.Address != null ? @event.Address.Street : "",
-                    City = @event.Address != null ? @event.Address.City : "",
-                    State = @event.Address != null ? @event.Address.State : "",
-                    ZipCode = @event.Address != null ? @event.Address.ZipCode : ""
-                };
-            }
-            else
-            {
-                ViewBag.ErrorMessage = "Only the event organizer can make changes to the event.";
-            }
+                StartDate = @event.StartDate,
+                Title = @event.Title,
+                Description = @event.Description,
+                ApplicationUserId = User.Identity.GetUserId(),
+                AddressId = @event.Address.Id,
+                Street = @event.Address != null ? @event.Address.Street : "",
+                City = @event.Address != null ? @event.Address.City : "",
+                State = @event.Address != null ? @event.Address.State : "",
+                ZipCode = @event.Address != null ? @event.Address.ZipCode : ""
+            };
 
             return View(myViewModel);
         }
@@ -108,27 +100,34 @@ namespace EventSquared.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Details(detailsViewModel myViewModel)
         {
-            if (ModelState.IsValid)
+            var @event = db.Events.FirstOrDefault(x => x.Id == myViewModel.Id);
+
+            if (User.Identity.GetUserId() == @event.ApplicationUserId)
             {
-                var @event = db.Events.FirstOrDefault(x => x.Id == myViewModel.Id);
+                if (ModelState.IsValid)
+                {
+                    @event.Title = myViewModel.Title;
+                    @event.StartDate = myViewModel.StartDate;
+                    @event.Description = myViewModel.Description;
+                    @event.Address.Street = myViewModel.Street;
+                    @event.Address.City = myViewModel.City;
+                    @event.Address.State = myViewModel.State;
+                    @event.Address.ZipCode = myViewModel.ZipCode;
 
-                @event.Title = myViewModel.Title;
-                @event.StartDate = myViewModel.StartDate;
-                @event.Description = myViewModel.Description;
-                @event.Address.Street = myViewModel.Street;
-                @event.Address.City = myViewModel.City;
-                @event.Address.State = myViewModel.State;
-                @event.Address.ZipCode = myViewModel.ZipCode;
+                    db.Entry(@event).State = EntityState.Modified;
+                    db.SaveChanges();
 
-                db.Entry(@event).State = EntityState.Modified;
-                db.SaveChanges();
+                    // create message telling user changes have been saved
 
-                // create message telling user changes have been saved
-
-                return RedirectToAction("All");
+                    return RedirectToAction("All");
+                }
+            }
+            else
+            {
+                ViewBag.ErrorMessage = "Only the event organizer can make changes to the event.";
             }
 
-            return View("All");
+            return View();
         }
 
         protected override void Dispose(bool disposing)
