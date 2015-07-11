@@ -1,4 +1,4 @@
-﻿@model IEnumerable<EventSquared.Models.Square>
+﻿@model IEnumerable<EventSquared.Models.Event>
 
 @{
     ViewBag.Title = "Index";
@@ -12,19 +12,16 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Event.Title)
+            @Html.DisplayNameFor(model => model.Address.Street)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ApplicationUser.FirstName)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Title)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.StartTime)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.EndTime)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Location)
+            @Html.DisplayNameFor(model => model.StartDate)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Description)
@@ -35,19 +32,16 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.Event.Title)
+            @Html.DisplayFor(modelItem => item.Address.Street)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ApplicationUser.FirstName)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Title)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.StartTime)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.EndTime)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Location)
+            @Html.DisplayFor(modelItem => item.StartDate)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Description)

@@ -15,11 +15,11 @@
 
                 if (user.FirstName != null)
                 {
-                    @Html.ActionLink("Hello " + user.FirstName + "!", "Settings", "Manage", routeValues: null, htmlAttributes: new { title = "Settings", @class = "hello-visibility" })
+                    @Html.ActionLink("Hello " + user.FirstName + "!", "account", "Manage", routeValues: null, htmlAttributes: new { title = "Settings", @class = "hello-visibility" })
                 }
                 else
                 {
-                    @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Settings", "Manage", routeValues: null, htmlAttributes: new { title = "Settings", @class = "hello-visibility" })
+                    @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "account", "Manage", routeValues: null, htmlAttributes: new { title = "Settings", @class = "hello-visibility" })
                 }
              } 
         </li>
@@ -30,7 +30,7 @@
 else
 {
     <ul class="nav navbar-nav navbar-right">
-        <li>@Html.ActionLink("Sign up", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
-        <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+        <li>@Html.ActionLink("Sign up", "SignUp", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+        <li>@Html.ActionLink("Log in", "login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
     </ul>
 }

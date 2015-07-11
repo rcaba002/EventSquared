@@ -2,6 +2,15 @@
     padding-top: 50px;
     padding-bottom: 20px;
     background-color: #EDEDED;
+    font-family: Corbel, Helvetica Neue, Helvetica, Arial, sans-serif;
+}
+
+.body-content h2 {
+    color: dimgray;
+}
+
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+    font-family: Corbel, Helvetica Neue, Helvetica, Arial, sans-serif;
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -61,11 +70,14 @@ hr {
 }
 
 .loginHeader {
-    font-family: Corbel, Helvetica Neue, Helvetica, Arial, sans-serif;
     margin-bottom: 12pt;
     font-size: 30pt;
     text-align: center;
     color: #D3622A;
+}
+
+.infoTitle {
+    color: dimgray;
 }
 
 .navbar-inverse .navbar-toggle .icon-bar {
@@ -152,6 +164,17 @@ button:focus {
     color: azure;
 }
 
+.btn-new {
+    padding: 5px 10px;
+    font-size: 15px;
+    line-height: 1.5;
+    border-radius: 3px;
+}
+
+.btn-new:hover {
+    text-decoration: none;
+}
+
     .btn-login:hover {
         background-color: dimgray;
         color: azure;
@@ -165,10 +188,15 @@ button:focus {
 
 .navbar-brand {
     color: #D3622A;
+    font-size: 29px;
 }
 
 .navbar-brand:hover {
     color: #D3622A !important;
+}
+
+.navbar-nav li {
+    font-size: 16px;
 }
 
 .navbar-nav li > a {
@@ -251,4 +279,62 @@ textarea {
 
 .eventTitle {
     margin-top: 30px;
+}
+
+.eventBox {
+    background-color: #fff;
+    box-shadow: 0 1px 0 0 rgba(0,0,0,.1);
+    display: block;
+    line-height: 22px;
+    padding: 0 0 6px 0;
+    width: 280px;
+    float: left;
+    margin: 0 30px 30px 0;
+}
+
+.eventBox_date {
+    display: block;
+    color: rgba(0,0,0,.8);
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    background-color: linen;
+    padding: 5px 15px 2px 15px;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    margin-bottom: 10px;
+}
+
+.eventBox_title {
+    display: block;
+    color: #3B5998;
+    font-size: 15px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: bold;
+    padding: 0px 15px 2px 15px;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.eventBox_dtitle {
+    font-weight: bold;
+    color: #D3622A;
+    font-size: 15px;
+    padding: 0px 15px 2px 15px;
+}
+
+.eventBox_description {
+    padding: 0px 15px 2px 15px;
+}
+
+.eventBox_btn {
+    margin: 15px auto 10px auto;
+    width: 60%;
+    display: block;
+    text-align: center;
+}
+
+.restricterrormsg {
+    color: #D3622A;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }

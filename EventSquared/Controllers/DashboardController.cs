@@ -6,9 +6,10 @@ using System.Web.Mvc;
 
 namespace EventSquared.Controllers
 {
-    public class HomeController : Controller
+    public class DashboardController : Controller
     {
-        public ActionResult Dashboard()
+        // GET: Dashboard
+        public ActionResult home()
         {
             return View();
         }

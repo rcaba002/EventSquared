@@ -63,7 +63,7 @@ namespace EventSquared.Models
         public bool RememberMe { get; set; }
     }
 
-    public class RegisterViewModel
+    public class SignUpViewModel
     {
         [Required]
         [Display(Name = "First name")]

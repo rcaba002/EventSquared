@@ -19,21 +19,21 @@
                 </button>
                 @if (Context.User.Identity.IsAuthenticated)
                 {
-                    @Html.ActionLink("Event²", "Dashboard", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                    @Html.ActionLink("Event²", "home", "Dashboard", new { area = "" }, new { @class = "navbar-brand" })
                 }
                 else
                 {
-                    @Html.ActionLink("Event²", "Login", "Account", new { area = "" }, new { @class = "navbar-brand" })
+                    @Html.ActionLink("Event²", "login", "Account", new { area = "" }, new { @class = "navbar-brand" })
                 }
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     @if (Context.User.Identity.IsAuthenticated)
                     {
-                        <li>@Html.ActionLink("Manage My Events", "All", "Events")</li>
-                        <li>@Html.ActionLink("Create New Event", "Create", "Events")</li>
-                        <li>@Html.ActionLink("My Dashboard", "Dashboard", "Home", new { area = "" }, new { @class = "item-visibility" })</li>
-                        <li>@Html.ActionLink("Update Account", "Settings", "Manage", new { area = "" }, new { @class = "item-visibility" })</li>
+                        <li>@Html.ActionLink("Manage My Events", "all", "Events")</li>
+                        <li>@Html.ActionLink("Create New Event", "new", "Events")</li>
+                        <li>@Html.ActionLink("My Dashboard", "home", "Dashboard", new { area = "" }, new { @class = "item-visibility" })</li>
+                        <li>@Html.ActionLink("Update Account", "account", "Manage", new { area = "" }, new { @class = "item-visibility" })</li>
                     }
                 </ul>
                 @Html.Partial("_LoginPartial")

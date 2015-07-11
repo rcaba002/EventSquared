@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
@@ -17,117 +16,119 @@ namespace EventSquared.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Events
-        public async Task<ActionResult> All()
+        public ActionResult All()
         {
             var events = db.Events.Include(@event => @event.Address).Include(@event => @event.ApplicationUser);
-            return View(await events.ToListAsync());
+            return View(events.ToList());
         }
 
-        // GET: Events/Details/5
-        public async Task<ActionResult> Details(int? id)
+        // GET: Events/new
+        public ActionResult New()
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Event @event = await db.Events.FindAsync(id);
-            if (@event == null)
-            {
-                return HttpNotFound();
-            }
-            return View(@event);
-        }
-
-        // GET: Events/Create
-        public ActionResult Create()
-        {
-            ViewBag.AddressId = new SelectList(db.Addresses, "Id", "Street");
-            ViewBag.ApplicationUserId = new SelectList(db.Users, "Id", "FirstName");
             return View();
         }
 
-        // POST: Events/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // POST: Events/new
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "Id,Title,StartDate,Description,AddressId,ApplicationUserId")] Event @event)
+        public ActionResult New(newViewModel model)
         {
             if (ModelState.IsValid)
             {
-                var userId = User.Identity.GetUserId();
+                var address = new Address()
+                {
+                    Street = model.Street,
+                    City = model.City,
+                    State = model.State,
+                    ZipCode = model.ZipCode
+                };
 
-                @event.ApplicationUserId = userId;
+                db.Addresses.Add(address);
+                db.SaveChanges();
+
+                var @event = new Event()
+                {
+                    StartDate = model.StartDate,
+                    Title = model.Title,
+                    Description = model.Description,
+                    ApplicationUserId = User.Identity.GetUserId(),
+                    AddressId = address.Id
+                };
 
                 db.Events.Add(@event);
-                await db.SaveChangesAsync();
+                db.SaveChanges();
+
                 return RedirectToAction("All");
             }
 
-            ViewBag.AddressId = new SelectList(db.Addresses, "Id", "Street", @event.AddressId);
-            ViewBag.ApplicationUserId = new SelectList(db.Users, "Id", "FirstName", @event.ApplicationUserId);
-            return View(@event);
+            return View(model);
         }
 
-        // GET: Events/Edit/5
-        public async Task<ActionResult> Edit(int? id)
+        // GET: Events/Details/5
+        public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Event @event = await db.Events.FindAsync(id);
+
+            var @event = db.Events.Include(x => x.Address).SingleOrDefault(x => x.Id == id.Value);
+
             if (@event == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.AddressId = new SelectList(db.Addresses, "Id", "Street", @event.AddressId);
-            ViewBag.ApplicationUserId = new SelectList(db.Users, "Id", "FirstName", @event.ApplicationUserId);
-            return View(@event);
+            detailsViewModel myViewModel = null;
+
+            if (User.Identity.GetUserId() == @event.ApplicationUserId)
+            {
+                myViewModel = new detailsViewModel
+                {
+                    StartDate = @event.StartDate,
+                    Title = @event.Title,
+                    Description = @event.Description,
+                    ApplicationUserId = User.Identity.GetUserId(),
+                    AddressId = @event.Address.Id,
+                    Street = @event.Address != null ? @event.Address.Street : "",
+                    City = @event.Address != null ? @event.Address.City : "",
+                    State = @event.Address != null ? @event.Address.State : "",
+                    ZipCode = @event.Address != null ? @event.Address.ZipCode : ""
+                };
+            }
+            else
+            {
+                ViewBag.ErrorMessage = "Only the event organizer can make changes to the event.";
+            }
+
+            return View(myViewModel);
         }
 
-        // POST: Events/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // POST: Events/Details/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "Id,Title,StartDate,Description,AddressId,ApplicationUserId")] Event @event)
+        public ActionResult Details(detailsViewModel myViewModel)
         {
             if (ModelState.IsValid)
             {
+                var @event = db.Events.FirstOrDefault(x => x.Id == myViewModel.Id);
+
+                @event.Title = myViewModel.Title;
+                @event.StartDate = myViewModel.StartDate;
+                @event.Description = myViewModel.Description;
+                @event.Address.Street = myViewModel.Street;
+                @event.Address.City = myViewModel.City;
+                @event.Address.State = myViewModel.State;
+                @event.Address.ZipCode = myViewModel.ZipCode;
+
                 db.Entry(@event).State = EntityState.Modified;
-                await db.SaveChangesAsync();
+                db.SaveChanges();
+
+                // create message telling user changes have been saved
+
                 return RedirectToAction("All");
             }
-            ViewBag.AddressId = new SelectList(db.Addresses, "Id", "Street", @event.AddressId);
-            ViewBag.ApplicationUserId = new SelectList(db.Users, "Id", "FirstName", @event.ApplicationUserId);
-            return View(@event);
-        }
 
-        // GET: Events/Delete/5
-        public async Task<ActionResult> Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Event @event = await db.Events.FindAsync(id);
-            if (@event == null)
-            {
-                return HttpNotFound();
-            }
-            return View(@event);
-        }
-
-        // POST: Events/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> DeleteConfirmed(int id)
-        {
-            Event @event = await db.Events.FindAsync(id);
-            db.Events.Remove(@event);
-            await db.SaveChangesAsync();
-            return RedirectToAction("All");
+            return View("All");
         }
 
         protected override void Dispose(bool disposing)

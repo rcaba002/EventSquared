@@ -6,6 +6,7 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
 using System.Collections.Generic;
+using System;
 
 namespace EventSquared.Models
 {
@@ -29,6 +30,69 @@ namespace EventSquared.Models
         }
     }
 
+    public class Event
+    {
+        public int Id { get; set; }
+
+        public string Title { get; set; }
+
+        [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}",
+            ApplyFormatInEditMode = true)]
+        public DateTime StartDate { get; set; }
+
+        public string Description { get; set; }
+
+        public int? AddressId { get; set; }
+        public virtual Address Address { get; set; }
+
+        public virtual ICollection<Square> Squares { get; set; }
+
+        public string ApplicationUserId { get; set; }
+        public virtual ApplicationUser ApplicationUser { get; set; }
+    }
+
+    public class Address
+    {
+        public int Id { get; private set; }
+
+        public string Street { get; set; }
+
+        public string City { get; set; }
+
+        public string State { get; set; }
+
+        public string ZipCode { get; set; }
+    }
+
+    public class Square
+    {
+        public int Id { get; set; }
+
+        [Required]
+        public string Title { get; set; }
+
+        [DisplayName("Start Time")]
+        [DisplayFormat(DataFormatString = "{0:HH:mm tt}",
+            ApplyFormatInEditMode = true)]
+        [Required]
+        public DateTime StartTime { get; set; }
+
+        [DisplayName("End Time")]
+        [DisplayFormat(DataFormatString = "{0:HH:mm tt}",
+            ApplyFormatInEditMode = true)]
+        [Required]
+        public DateTime EndTime { get; set; }
+
+        [MaxLength(200)]
+        public string Location { get; set; }
+
+        [Description]
+        public string Description { get; set; }
+
+        public int EventId { get; set; }
+        public virtual Event Event { get; set; }
+    }
+
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext()
@@ -46,5 +110,9 @@ namespace EventSquared.Models
         {
             return new ApplicationDbContext();
         }
+
+        public System.Data.Entity.DbSet<EventSquared.Models.newViewModel> newViewModels { get; set; }
+
+        public System.Data.Entity.DbSet<EventSquared.Models.detailsViewModel> detailsViewModels { get; set; }
     }
 }

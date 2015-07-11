@@ -51,8 +51,8 @@ namespace EventSquared.Controllers
         }
 
         //
-        // GET: /Manage/Settings
-        public async Task<ActionResult> Settings(ManageMessageId? message)
+        // GET: /Manage/account
+        public async Task<ActionResult> account(ManageMessageId? message)
         {
             ViewBag.StatusMessage =
                 message == ManageMessageId.ChangePasswordSuccess ? "Your password has been changed."
@@ -64,7 +64,7 @@ namespace EventSquared.Controllers
                 : "";
 
             var userId = User.Identity.GetUserId();
-            var model = new SettingsViewModel
+            var model = new accountViewModel
             {
                 HasPassword = HasPassword(),
                 PhoneNumber = await UserManager.GetPhoneNumberAsync(userId),

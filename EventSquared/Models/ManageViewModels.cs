@@ -5,7 +5,7 @@ using Microsoft.Owin.Security;
 
 namespace EventSquared.Models
 {
-    public class SettingsViewModel
+    public class accountViewModel
     {
         public bool HasPassword { get; set; }
         public IList<UserLoginInfo> Logins { get; set; }

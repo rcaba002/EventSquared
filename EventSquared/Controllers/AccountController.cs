@@ -61,7 +61,7 @@ namespace EventSquared.Controllers
 
             if (User.Identity.IsAuthenticated)
             {
-                return RedirectToAction("Dashboard", "Home");
+                return RedirectToAction("home", "Dashboard");
             }
             else
             {
@@ -160,19 +160,19 @@ namespace EventSquared.Controllers
         }
 
         //
-        // GET: /Account/Register
+        // GET: /Account/Signup
         [AllowAnonymous]
-        public ActionResult Register()
+        public ActionResult SignUp()
         {
             return View();
         }
 
         //
-        // POST: /Account/Register
+        // POST: /Account/Signup
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Register(RegisterViewModel model)
+        public async Task<ActionResult> SignUp(SignUpViewModel model)
         {
             if (ModelState.IsValid)
             {
@@ -191,11 +191,11 @@ namespace EventSquared.Controllers
 
                     string callbackUrl = await SendEmailConfirmationTokenAsync(user.Id, "Confirm your account");
 
-                    ViewBag.Message = "Check your email and confirm your account, you must be confirmed "
+                    ViewBag.Message = "An email was sent to confirm your account. You must be confirmed "
                                     + "before you can log in.";
 
                     return View("Info");
-                    //return RedirectToAction("Index", "Home");
+                    //return RedirectToAction("Index", "home");
                 }
                 AddErrors(result);
             }
@@ -483,7 +483,7 @@ namespace EventSquared.Controllers
             {
                 return Redirect(returnUrl);
             }
-            return RedirectToAction("Dashboard", "Home");
+            return RedirectToAction("home", "Dashboard");
         }
 
         internal class ChallengeResult : HttpUnauthorizedResult
