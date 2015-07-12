@@ -1,5 +1,3 @@
-C:\Work\EventSquared\EventSquared\obj\Debug\EventSquared.Migrations.Init.resources
-C:\Work\EventSquared\EventSquared\obj\Debug\EventSquared.csproj.GenerateResource.Cache
 C:\Work\EventSquared\EventSquared\bin\EventSquared.dll.config
 C:\Work\EventSquared\EventSquared\bin\EventSquared.dll
 C:\Work\EventSquared\EventSquared\bin\EventSquared.pdb
@@ -56,3 +54,5 @@ C:\Work\EventSquared\EventSquared\bin\Microsoft.Owin.Security.Twitter.xml
 C:\Work\EventSquared\EventSquared\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
 C:\Work\EventSquared\EventSquared\obj\Debug\EventSquared.dll
 C:\Work\EventSquared\EventSquared\obj\Debug\EventSquared.pdb
+C:\Work\EventSquared\EventSquared\obj\Debug\EventSquared.Migrations.Init.resources
+C:\Work\EventSquared\EventSquared\obj\Debug\EventSquared.csproj.GenerateResource.Cache

@@ -12,10 +12,27 @@ namespace EventSquared.Migrations
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
-                        Street = c.String(nullable: false, maxLength: 100),
-                        City = c.String(nullable: false, maxLength: 50),
-                        State = c.String(nullable: false, maxLength: 20),
-                        ZipCode = c.String(nullable: false, maxLength: 20),
+                        Street = c.String(),
+                        City = c.String(),
+                        State = c.String(),
+                        ZipCode = c.String(),
+                    })
+                .PrimaryKey(t => t.Id);
+            
+            CreateTable(
+                "dbo.eventDetailsViewModels",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        StartDate = c.DateTime(nullable: false),
+                        Title = c.String(maxLength: 100),
+                        Description = c.String(),
+                        Street = c.String(maxLength: 100),
+                        City = c.String(maxLength: 50),
+                        State = c.String(maxLength: 20),
+                        ZipCode = c.String(maxLength: 20),
+                        ApplicationUserId = c.String(),
+                        AddressId = c.Int(),
                     })
                 .PrimaryKey(t => t.Id);
             
@@ -24,9 +41,9 @@ namespace EventSquared.Migrations
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
-                        Title = c.String(nullable: false, maxLength: 100),
+                        Title = c.String(),
                         StartDate = c.DateTime(nullable: false),
-                        Description = c.String(nullable: false),
+                        Description = c.String(),
                         AddressId = c.Int(),
                         ApplicationUserId = c.String(maxLength: 128),
                     })
@@ -104,16 +121,34 @@ namespace EventSquared.Migrations
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
-                        Title = c.String(nullable: false),
+                        CurrentTime = c.DateTime(nullable: false),
+                        Title = c.String(),
                         StartTime = c.DateTime(nullable: false),
                         EndTime = c.DateTime(nullable: false),
-                        Location = c.String(maxLength: 200),
+                        Location = c.String(),
                         Description = c.String(),
                         EventId = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Events", t => t.EventId, cascadeDelete: true)
                 .Index(t => t.EventId);
+            
+            CreateTable(
+                "dbo.newEventViewModels",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        StartDate = c.DateTime(nullable: false),
+                        Title = c.String(nullable: false, maxLength: 100),
+                        Description = c.String(),
+                        ApplicationUserId = c.String(),
+                        Street = c.String(nullable: false, maxLength: 100),
+                        City = c.String(nullable: false, maxLength: 50),
+                        State = c.String(nullable: false, maxLength: 20),
+                        ZipCode = c.String(nullable: false, maxLength: 20),
+                        AddressId = c.Int(),
+                    })
+                .PrimaryKey(t => t.Id);
             
             CreateTable(
                 "dbo.AspNetRoles",
@@ -148,12 +183,14 @@ namespace EventSquared.Migrations
             DropIndex("dbo.Events", new[] { "ApplicationUserId" });
             DropIndex("dbo.Events", new[] { "AddressId" });
             DropTable("dbo.AspNetRoles");
+            DropTable("dbo.newEventViewModels");
             DropTable("dbo.Squares");
             DropTable("dbo.AspNetUserRoles");
             DropTable("dbo.AspNetUserLogins");
             DropTable("dbo.AspNetUserClaims");
             DropTable("dbo.AspNetUsers");
             DropTable("dbo.Events");
+            DropTable("dbo.eventDetailsViewModels");
             DropTable("dbo.Addresses");
         }
     }

@@ -7,70 +7,46 @@ using System.Web;
 
 namespace EventSquared.Models
 {
-    public class newEventViewModel
+    public class EventViewModel
     {
-        [DisplayName("Date")]
         [Required]
-        public DateTime StartDate { get; set; }
+        public int Id { get; set; }
 
-        [MaxLength(100)]
         [Required]
-        public string Title { get; set; }
-
-        [Description]
-        public string Description { get; set; }
-
         public string ApplicationUserId { get; set; }
 
-        [MaxLength(100)]
         [Required]
-        public string Street { get; set; }
-
-        [MaxLength(50)]
-        [Required]
-        public string City { get; set; }
-
-        [MaxLength(20)]
-        [Required]
-        public string State { get; set; }
-
-        [MaxLength(20)]
-        [Required]
-        public string ZipCode { get; set; }
-
         public int? AddressId { get; set; }
 
-        public int Id { get; set; }
-    }
-
-    public class eventDetailsViewModel
-    {
-        public int Id { get; set; }
-
+        [Required]
         [DisplayName("Date")]
+        [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}",
+            ApplyFormatInEditMode = true)]
         public DateTime StartDate { get; set; }
 
         [MaxLength(100)]
+        [Required]
         public string Title { get; set; }
 
         [Description]
+        [Required]
         public string Description { get; set; }
 
         [MaxLength(100)]
+        [Required]
         public string Street { get; set; }
 
         [MaxLength(50)]
+        [Required]
         public string City { get; set; }
 
         [MaxLength(20)]
+        [Required]
         public string State { get; set; }
 
         [MaxLength(20)]
         [DisplayName("Zip Code")]
+        [Required]
         public string ZipCode { get; set; }
-
-        public string ApplicationUserId { get; set; }
-
-        public int? AddressId { get; set; }
     }
 }

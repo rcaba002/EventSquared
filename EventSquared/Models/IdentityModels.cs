@@ -68,25 +68,16 @@ namespace EventSquared.Models
     {
         public int Id { get; set; }
 
-        [Required]
+        public DateTime CurrentTime { get; set; }
+
         public string Title { get; set; }
 
-        [DisplayName("Start Time")]
-        [DisplayFormat(DataFormatString = "{0:HH:mm tt}",
-            ApplyFormatInEditMode = true)]
-        [Required]
         public DateTime StartTime { get; set; }
 
-        [DisplayName("End Time")]
-        [DisplayFormat(DataFormatString = "{0:HH:mm tt}",
-            ApplyFormatInEditMode = true)]
-        [Required]
         public DateTime EndTime { get; set; }
 
-        [MaxLength(200)]
         public string Location { get; set; }
 
-        [Description]
         public string Description { get; set; }
 
         public int EventId { get; set; }
@@ -111,8 +102,8 @@ namespace EventSquared.Models
             return new ApplicationDbContext();
         }
 
-        public System.Data.Entity.DbSet<EventSquared.Models.newViewModel> newViewModels { get; set; }
+        public System.Data.Entity.DbSet<EventSquared.Models.newEventViewModel> newEventViewModels { get; set; }
 
-        public System.Data.Entity.DbSet<EventSquared.Models.detailsViewModel> detailsViewModels { get; set; }
+        public System.Data.Entity.DbSet<EventSquared.Models.eventDetailsViewModel> eventDetailsViewModels { get; set; }
     }
 }

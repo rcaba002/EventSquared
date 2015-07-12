@@ -1,4 +1,9 @@
-﻿@model EventSquared.Models.detailsViewModel
+﻿@model EventSquared.Models.eventDetailsViewModel
+
+<head>
+    <title>Event² - @ViewBag.Title</title>
+    @Styles.Render("~/Content/specificpage.css")
+</head>
 
 @{
     ViewBag.Title = "Event Details";
@@ -14,13 +19,11 @@
     {
     <h4 class="restricterrormsg">@ViewData["ErrorMessage"]</h4>
     }
-    
+
     <div class="form-horizontal">
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.Id)
-        @Html.HiddenFor(model => model.ApplicationUserId)
-        @Html.HiddenFor(model => model.AddressId)
         <div class="form-group">
             @Html.LabelFor(model => model.StartDate, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -76,10 +79,13 @@
                 @Html.ValidationMessageFor(model => model.ZipCode, "", new { @class = "text-danger" })
             </div>
         </div>
+        @Html.HiddenFor(model => model.ApplicationUserId)
+        @Html.HiddenFor(model => model.AddressId)
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Save" class="btn btn-default" />
+                <input type="button" value="Delete" class="btn btn-default" onclick="location.href='@Url.Action("Delete", "Events", new { id = Model.Id })'" />
             </div>
         </div>
     </div>

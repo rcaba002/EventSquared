@@ -31,7 +31,7 @@ namespace EventSquared.Controllers
         // POST: Events/new
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult New(newViewModel model)
+        public ActionResult New(newEventViewModel model)
         {
             if (ModelState.IsValid)
             {
@@ -79,17 +79,18 @@ namespace EventSquared.Controllers
                 return HttpNotFound();
             }
 
-            var myViewModel = new detailsViewModel
+            var myViewModel = new eventDetailsViewModel
             {
+                Id = @event.Id,
                 StartDate = @event.StartDate,
                 Title = @event.Title,
                 Description = @event.Description,
-                ApplicationUserId = User.Identity.GetUserId(),
-                AddressId = @event.Address.Id,
                 Street = @event.Address != null ? @event.Address.Street : "",
                 City = @event.Address != null ? @event.Address.City : "",
                 State = @event.Address != null ? @event.Address.State : "",
-                ZipCode = @event.Address != null ? @event.Address.ZipCode : ""
+                ZipCode = @event.Address != null ? @event.Address.ZipCode : "",
+                ApplicationUserId = User.Identity.GetUserId(),
+                AddressId = @event.Address.Id        
             };
 
             return View(myViewModel);
@@ -98,7 +99,7 @@ namespace EventSquared.Controllers
         // POST: Events/Details/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Details(detailsViewModel myViewModel)
+        public ActionResult Details(eventDetailsViewModel myViewModel)
         {
             var @event = db.Events.FirstOrDefault(x => x.Id == myViewModel.Id);
 
@@ -127,7 +128,72 @@ namespace EventSquared.Controllers
                 ViewBag.ErrorMessage = "Only the event organizer can make changes to the event.";
             }
 
-            return View();
+            return View(myViewModel);
+        }
+
+        // GET: Events/Delete/5
+        public ActionResult Delete(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            var @event = db.Events.Include(x => x.Address).SingleOrDefault(x => x.Id == id.Value);
+
+            if (@event == null)
+            {
+                return HttpNotFound();
+            }
+
+            var myViewModel = new eventDetailsViewModel
+            {
+                Id = @event.Id,
+                StartDate = @event.StartDate,
+                Title = @event.Title,
+                Description = @event.Description,
+                ApplicationUserId = User.Identity.GetUserId(),
+                AddressId = @event.Address.Id,
+                Street = @event.Address != null ? @event.Address.Street : "",
+                City = @event.Address != null ? @event.Address.City : "",
+                State = @event.Address != null ? @event.Address.State : "",
+                ZipCode = @event.Address != null ? @event.Address.ZipCode : ""
+            };
+
+            return View(myViewModel);
+        }
+
+        // POST: Events/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(eventDetailsViewModel myViewModel)
+        {
+            var @event = db.Events.FirstOrDefault(x => x.Id == myViewModel.Id);
+
+            if (ModelState.IsValid)
+            {
+                @event.Title = myViewModel.Title;
+                @event.StartDate = myViewModel.StartDate;
+                @event.Description = myViewModel.Description;
+                @event.Address.Street = myViewModel.Street;
+                @event.Address.City = myViewModel.City;
+                @event.Address.State = myViewModel.State;
+                @event.Address.ZipCode = myViewModel.ZipCode;
+
+                if (User.Identity.GetUserId() == @event.ApplicationUserId)
+                {
+                    db.Entry(@event).State = EntityState.Deleted;
+                    db.SaveChanges();
+
+                    // create message telling user changes have been saved
+                }
+                else
+                {
+                    ViewBag.noDelete = "Only the event organizer can delete the event.";
+                }
+            }
+
+            return RedirectToAction("All");
         }
 
         protected override void Dispose(bool disposing)
