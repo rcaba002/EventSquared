@@ -103,7 +103,7 @@ namespace EventSquared.Controllers
             Square square = db.Squares.Find(id);
             db.Squares.Remove(square);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("All", "Events");
         }
 
         protected override void Dispose(bool disposing)
