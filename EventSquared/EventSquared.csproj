@@ -346,7 +346,6 @@
     <Content Include="Views\Squares\New.cshtml" />
     <Content Include="Views\Squares\Delete.cshtml" />
     <Content Include="Views\Squares\Details.cshtml" />
-    <Content Include="Views\Squares\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
