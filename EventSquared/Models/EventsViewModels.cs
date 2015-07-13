@@ -7,6 +7,14 @@ using System.Web;
 
 namespace EventSquared.Models
 {
+    public class allEventViewModel
+    {
+        public IEnumerable<Event> yourEvents { get; set; }
+        public IEnumerable<Event> subscribedEvents { get; set; }
+        public IEnumerable<Square> allSquares { get; set; }
+        public IEnumerable<Square> yourSquares { get; set; }
+    }
+    
     public class newEventViewModel
     {
         [DisplayName("Date")]
@@ -48,6 +56,7 @@ namespace EventSquared.Models
         public int Id { get; set; }
 
         [DisplayName("Date")]
+        [DisplayFormat(DataFormatString = "{0:M/d/yyyy}", ApplyFormatInEditMode = true)]  
         public DateTime StartDate { get; set; }
 
         [MaxLength(100)]

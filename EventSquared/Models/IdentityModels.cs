@@ -36,7 +36,7 @@ namespace EventSquared.Models
 
         public string Title { get; set; }
 
-        [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}",
+        [DisplayFormat(DataFormatString = "{0:dddd, MMMM d, yyyy}",
             ApplyFormatInEditMode = true)]
         public DateTime StartDate { get; set; }
 
@@ -68,12 +68,15 @@ namespace EventSquared.Models
     {
         public int Id { get; set; }
 
+        [DisplayFormat(DataFormatString = "{0:M/d/yyyy HH:mm tt}", ApplyFormatInEditMode = true)]   
         public DateTime CurrentTime { get; set; }
 
         public string Title { get; set; }
 
+        [DisplayFormat(DataFormatString = "{0:HH:mm tt}", ApplyFormatInEditMode = true)]
         public DateTime StartTime { get; set; }
 
+        [DisplayFormat(DataFormatString = "{0:HH:mm tt}", ApplyFormatInEditMode = true)]
         public DateTime EndTime { get; set; }
 
         public string Location { get; set; }
@@ -82,6 +85,9 @@ namespace EventSquared.Models
 
         public int EventId { get; set; }
         public virtual Event Event { get; set; }
+
+        public string ApplicationUserId { get; set; }
+        public virtual ApplicationUser ApplicationUser { get; set; }
     }
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>

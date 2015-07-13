@@ -26,60 +26,63 @@ namespace EventSquared.Migrations
             {
                 FirstName = "Rob",
                 LastName = "Cabardo",
-                UserName = "rcaba002@gmail.com",
-                Email = "rcaba002@gmail.com",
-                PhoneNumber = "314-365-3234",
+                UserName = "email@Example.com",
+                Email = "email@Example.com",
+                PhoneNumber = "314-555-1234",
                 EmailConfirmed = true,
                 Address = new Address { 
-                    Street = "414 N. 23rd Street", 
+                    Street = "321 Main Street", 
                     City = "St. Louis", 
                     State = "MO", 
-                    ZipCode = "63103" }
+                    ZipCode = "63108" }
             };
 
             manager.Create(user, "Password1");
 
             context.Events.Add(new Event
             {
-                Title = "32nd Birthday Party",
-                StartDate = new DateTime(2015, 9, 26),
-                Description = "Join me in celebrating my 32nd Birthday!",
+                Title = "Jane's Birthday Party",
+                StartDate = new DateTime(2015, 7, 17),
+                Description = "Join us in celebrating Jane's Birthday!",
                 ApplicationUserId = user.Id,
                 Address = new Address {
-                    Street = "101 Nansemond Ave",
+                    Street = "101 Forest Ave",
                     City = "St. Louis",
                     State = "MO",
-                    ZipCode = "63101" }
+                    ZipCode = "63103" }
             });
 
             context.Squares.Add(new Square
             {
                 Title = "Dinner",
-                CurrentTime = new DateTime(2015, 7, 12, 16, 44, 12),
-                StartTime = new DateTime(2015, 9, 26, 6, 0, 0),
-                EndTime = new DateTime(2015, 9, 26, 8, 0, 0),
+                CurrentTime = new DateTime(2015, 7, 10, 16, 44, 12),
+                StartTime = new DateTime(2015, 7, 17, 5, 0, 0),
+                EndTime = new DateTime(2015, 7, 17, 7, 0, 0),
+                ApplicationUserId = user.Id,
                 Location = "Schlafly Taproom",
-                Description = "Serving a chicken entree and a vegetarian entree. $15 at the door."
+                Description = "Chicken and vegetarian options available."
             });
 
             context.Squares.Add(new Square
             {
-                Title = "Drinks",
-                CurrentTime = new DateTime(2015, 7, 16, 11, 31, 32),
-                StartTime = new DateTime(2015, 9, 26, 8, 30, 0),
-                EndTime = new DateTime(2015, 9, 26, 11, 0, 0),
-                Location = "Bobby's Place",
-                Description = "Contact me for address or to arrange carpool."
+                Title = "Gifts",
+                CurrentTime = new DateTime(2015, 7, 13, 11, 31, 32),
+                StartTime = new DateTime(2015, 7, 17, 7, 0, 0),
+                EndTime = new DateTime(2015, 7, 17, 7, 30, 0),
+                ApplicationUserId = user.Id,
+                Location = "Rob's House",
+                Description = "Contact Rob for address and directions."
             });
 
             context.Squares.Add(new Square
             {
-                Title = "After Hours House Party",
-                CurrentTime = new DateTime(2015, 7, 12, 13, 11, 30),
-                StartTime = new DateTime(2015, 9, 26, 11, 30, 0),
-                EndTime = new DateTime(2015, 9, 26, 3, 0, 0),
-                Location = "My House",
-                Description = "Beer and wine provided. BYOL."
+                Title = "Dancing",
+                CurrentTime = new DateTime(2015, 7, 14, 13, 11, 30),
+                StartTime = new DateTime(2015, 7, 17, 9, 0, 0),
+                EndTime = new DateTime(2015, 7, 17, 11, 0, 0),
+                ApplicationUserId = user.Id,
+                Location = "The Club",
+                Description = "Look for our VIP private area."
             });
         }
     }

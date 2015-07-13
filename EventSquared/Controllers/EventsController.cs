@@ -18,8 +18,14 @@ namespace EventSquared.Controllers
         // GET: Events
         public ActionResult All()
         {
-            var events = db.Events.Include(@event => @event.Address).Include(@event => @event.ApplicationUser);
-            return View(events.ToList());
+            var model = new allEventViewModel
+            {
+                yourEvents = db.Events.ToList().Where(x => x.ApplicationUserId == User.Identity.GetUserId()),
+                yourSquares = db.Squares.ToList().Where(x => x.ApplicationUserId == User.Identity.GetUserId()),
+                allSquares = db.Squares.OrderByDescending(x => x.CurrentTime).ToList()
+            };
+
+            return View(model);
         }
 
         // GET: Events/new

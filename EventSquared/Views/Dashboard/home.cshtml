@@ -1,31 +1,62 @@
-﻿@{
+﻿@model EventSquared.Models.allEventViewModel
+@using Microsoft.AspNet.Identity
+@using EventSquared.Models
+
+<head>
+    <title>Event² - @ViewBag.Title</title>
+    @Styles.Render("~/Content/specificpage.css")
+</head>
+
+@{
     ViewBag.Title = "Dashboard";
 }
 
-<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="http://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+<div class="col-md-8 nopad">
+    <h1 style="color:#3B5998">@ViewBag.Title</h1>
+    <h2>Your Events</h2>
+
+    @foreach (var item in Model.yourEvents)
+    {
+        <div class="eventBox">
+            <div class="eventBox_date"><b style="color:#D3622A">For</b> @Html.DisplayFor(modelItem => item.StartDate)</div>
+            <div class="eventBox_title">@Html.DisplayFor(modelItem => item.Title)</div>
+            <div class="eventBox_dtitle">@Html.DisplayNameFor(model => item.Description)</div>
+            <div class="eventBox_description">@Html.DisplayFor(modelItem => item.Description)</div>
+            <div>@Html.ActionLink("Details", "Details", "Events", new { id = item.Id }, new { @class = "btn-primary btn-new eventBox_btn" })</div>
+        </div>
+    }
+
+    <div style="display:inline-block">
+        <h2>Subscribed To Events</h2>
+
+        @foreach (var item in Model.subscribedEvents)
+        {
+            <div class="eventBox">
+                <div class="eventBox_date"><b style="color:#D3622A">For</b> @Html.DisplayFor(modelItem => item.StartDate)</div>
+                <div class="eventBox_title">@Html.DisplayFor(modelItem => item.Title)</div>
+                <div class="eventBox_dtitle">@Html.DisplayNameFor(model => item.Description)</div>
+                <div class="eventBox_description">@Html.DisplayFor(modelItem => item.Description)</div>
+                <div>@Html.ActionLink("Details", "Details", "Events", new { id = item.Id }, new { @class = "btn-primary btn-new eventBox_btn" })</div>
+            </div>
+        }
+    </div>
 </div>
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
+<div class="col-md-4 nopad">
+    <h2>Square Feed</h2>
+
+    <div class="scrollfeed">
+        @foreach (var item in Model.allSquares)
+        {
+            <div class="squareBox">
+                <div class="squareBox_ctime">Updated: @Html.DisplayFor(modelItem => item.CurrentTime)</div>
+                <div class="squareBox_etitle">@Html.DisplayFor(modelItem => item.Title)</div>
+                <div class="squareBox_title">Event - @Html.DisplayFor(modelItem => item.Event.Title)</div>
+                <div class="squareBox_title">Begins: @Html.DisplayFor(modelItem => item.StartTime) Ends: @Html.DisplayFor(modelItem => item.EndTime)</div>
+                <div class="squareBox_title">Location: @Html.DisplayFor(modelItem => item.Location)</div>
+                <div class="squareBox_dtitle">@Html.DisplayNameFor(model => item.Description)</div>
+                <div class="squareBox_description">@Html.DisplayFor(modelItem => item.Description)</div>
+            </div>
+        }
     </div>
 </div>

@@ -281,15 +281,50 @@ textarea {
     margin-top: 30px;
 }
 
+.col-md-4 {
+    display: inline-block !important;
+}
+
+.scrollfeed {
+    overflow-y: scroll !important;
+    padding: 17px;
+    height: 533px;
+    border: 1px solid lightgray;
+    background-color: #fff;
+}
+
+.scrollfeedallView {
+    overflow-y: scroll !important;
+    padding: 17px;
+    height: 504px;
+    border: 1px solid lightgray;
+    background-color: #fff;
+}
+
+.nopad {
+    padding-right: 0 !important;
+    padding-left: 0 !important;
+}
+
 .eventBox {
     background-color: #fff;
     box-shadow: 0 1px 0 0 rgba(0,0,0,.1);
     display: block;
     line-height: 22px;
     padding: 0 0 6px 0;
-    width: 280px;
+    width: 315px;
     float: left;
     margin: 0 30px 30px 0;
+    border: 1px solid gainsboro;
+}
+
+@media (max-width: 768px) {
+    .eventBox {
+        max-width: 280px;
+    }
+    .eventBox_date {
+        font-size: 11px !important;
+    }
 }
 
 .eventBox_date {
@@ -298,7 +333,7 @@ textarea {
     font-size: 13px;
     text-transform: uppercase;
     letter-spacing: 1px;
-    background-color: linen;
+    background-color: lightgray;
     padding: 5px 15px 2px 15px;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     margin-bottom: 10px;
@@ -337,4 +372,81 @@ textarea {
     color: #D3622A;
     margin-top: 20px;
     margin-bottom: 20px;
+}
+
+.squareBox {
+    background-color: snow;
+    box-shadow: 0 1px 0 0 rgba(0,0,0,.1);
+    display: block;
+    padding: 0 0 6px 0;
+    width: 100%;
+    margin: 0 0 30px 0;
+    border: 1px solid gainsboro;
+}
+
+.squareBox_ctime {
+    display: block;
+    color: rgba(0,0,0,.8);
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    background-color: linen;
+    padding: 5px 15px 2px 15px;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    margin-bottom: 10px;
+}
+
+.squareBox_etitle {
+    display: block;
+    color: #3B5998;
+    font-size: 15px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: bold;
+    padding: 0px 15px 2px 15px;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.squareBox_yourtitle {
+    display: block;
+    color: #3B5998;
+    font-size: 15px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: bold;
+    padding: 0px 15px 2px 15px;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.squareBox_youretitle {
+    display: block;
+    background-color: lightgray;
+    color: #3B5998;
+    font-size: 15px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 2px 15px 2px 15px;
+    margin-bottom: 9px;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.squareBox_title {
+    display: block;
+    color: gray;
+    font-size: 13px;
+    letter-spacing: 1px;
+    font-weight: bold;
+    padding: 0px 15px 2px 15px;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.squareBox_dtitle {
+    font-weight: bold;
+    color: #D3622A;
+    font-size: 15px;
+    padding: 0px 15px 2px 15px;
+}
+
+.squareBox_description {
+    padding: 0px 15px 2px 15px;
 }
