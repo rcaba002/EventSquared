@@ -179,7 +179,6 @@
     <Compile Include="Controllers\EventsController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\SquaresController.cs" />
-    <Compile Include="Controllers\tempEventsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -334,11 +333,6 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\Info.cshtml" />
-    <Content Include="Views\tempEvents\Create.cshtml" />
-    <Content Include="Views\tempEvents\Delete.cshtml" />
-    <Content Include="Views\tempEvents\Details.cshtml" />
-    <Content Include="Views\tempEvents\Edit.cshtml" />
-    <Content Include="Views\tempEvents\Index.cshtml" />
     <Content Include="Views\Events\New.cshtml" />
     <Content Include="Views\Events\Details.cshtml" />
     <Content Include="Views\Events\Delete.cshtml" />
