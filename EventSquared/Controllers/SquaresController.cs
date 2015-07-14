@@ -15,11 +15,24 @@ namespace EventSquared.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: Squares/Create
+        // GET: Squares
+        public ActionResult All()
+        {
+            var model = new allViewModel
+            {
+                yourSquares = db.Squares.ToList().Where(x => x.ApplicationUserId == User.Identity.GetUserId()),
+                allSquares = db.Squares.OrderByDescending(x => x.CurrentTime).ToList()
+            };
+
+            return View(model);
+        }
+
+        // GET: Squares/new
         public ActionResult New()
         {
-            ViewBag.ApplicationUserId = new SelectList(db.Users, "Id", "FirstName");
-            ViewBag.EventId = new SelectList(db.Events, "Id", "Title");
+            var UserId = User.Identity.GetUserId();
+
+            ViewBag.EventId = new SelectList(db.Events.Where(x => x.ApplicationUserId == UserId), "Id", "Title");
             return View();
         }
 
@@ -28,25 +41,29 @@ namespace EventSquared.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult New([Bind(Include = "Id,CurrentTime,Title,StartTime,EndTime,Location,Description,EventId,ApplicationUserId")] Square square)
+        public ActionResult New([Bind(Include = "Id,Title,StartTime,EndTime,Location,Description,EventId, ApplicationUserId")] Square square)
         {
+            var UserId = User.Identity.GetUserId();
+
             if (ModelState.IsValid)
             {
                 square.CurrentTime = DateTime.Now;
                 square.ApplicationUserId = User.Identity.GetUserId();
                 db.Squares.Add(square);
                 db.SaveChanges();
-                return RedirectToAction("All", "Events");
+
+                return RedirectToAction("All");
             }
 
-            ViewBag.ApplicationUserId = new SelectList(db.Users, "Id", "FirstName", square.ApplicationUserId);
-            ViewBag.EventId = new SelectList(db.Events, "Id", "Title", square.EventId);
+            ViewBag.EventId = new SelectList(db.Events.Where(x => x.ApplicationUserId == UserId), "Id", "Title", square.EventId);
             return View(square);
         }
 
         // GET: Squares/Details/5
         public ActionResult Details(int? id)
         {
+            var UserId = User.Identity.GetUserId();
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -56,8 +73,8 @@ namespace EventSquared.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.ApplicationUserId = new SelectList(db.Users, "Id", "FirstName", square.ApplicationUserId);
-            ViewBag.EventId = new SelectList(db.Events, "Id", "Title", square.EventId);
+
+            ViewBag.EventId = new SelectList(db.Events.Where(x => x.ApplicationUserId == UserId), "Id", "Title", square.EventId);
             return View(square);
         }
 
@@ -66,17 +83,19 @@ namespace EventSquared.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Details([Bind(Include = "Id,CurrentTime,Title,StartTime,EndTime,Location,Description,EventId,ApplicationUserId")] Square square)
+        public ActionResult Details([Bind(Include = "Id,Title,StartTime,EndTime,Location,Description,EventId, ApplicationUserId")] Square square)
         {
+            var UserId = User.Identity.GetUserId();
+
             if (ModelState.IsValid)
             {
                 square.CurrentTime = DateTime.Now;
                 db.Entry(square).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("All", "Events");
+                return RedirectToAction("All");
             }
-            ViewBag.ApplicationUserId = new SelectList(db.Users, "Id", "FirstName", square.ApplicationUserId);
-            ViewBag.EventId = new SelectList(db.Events, "Id", "Title", square.EventId);
+
+            ViewBag.EventId = new SelectList(db.Events.Where(x => x.ApplicationUserId == UserId), "Id", "Title", square.EventId);
             return View(square);
         }
 
@@ -103,7 +122,7 @@ namespace EventSquared.Controllers
             Square square = db.Squares.Find(id);
             db.Squares.Remove(square);
             db.SaveChanges();
-            return RedirectToAction("All", "Events");
+            return RedirectToAction("All");
         }
 
         protected override void Dispose(bool disposing)

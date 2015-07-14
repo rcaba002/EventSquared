@@ -20,7 +20,7 @@ namespace EventSquared.Migrations
                 .PrimaryKey(t => t.Id);
             
             CreateTable(
-                "dbo.eventDetailsViewModels",
+                "dbo.detailsEventViewModels",
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
@@ -195,7 +195,7 @@ namespace EventSquared.Migrations
             DropTable("dbo.AspNetUserClaims");
             DropTable("dbo.AspNetUsers");
             DropTable("dbo.Events");
-            DropTable("dbo.eventDetailsViewModels");
+            DropTable("dbo.detailsEventViewModels");
             DropTable("dbo.Addresses");
         }
     }

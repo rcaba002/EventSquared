@@ -21,13 +21,22 @@ namespace EventSquared.Models
 
         public virtual ICollection<Event> Events { get; set; }
 
+        public virtual ICollection<Square> Squares { get; set; }
+
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
-            // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
             var userIdentity = await manager.CreateIdentityAsync(this, DefaultAuthenticationTypes.ApplicationCookie);
-            // Add custom user claims here
+
             return userIdentity;
         }
+    }
+
+    public class allViewModel
+    {
+        public IEnumerable<Event> yourEvents { get; set; }
+        public IEnumerable<Event> subscribedEvents { get; set; }
+        public IEnumerable<Square> allSquares { get; set; }
+        public IEnumerable<Square> yourSquares { get; set; }
     }
 
     public class Event
@@ -53,7 +62,7 @@ namespace EventSquared.Models
 
     public class Address
     {
-        public int Id { get; private set; }
+        public int Id { get; set; }
 
         public string Street { get; set; }
 
@@ -110,6 +119,6 @@ namespace EventSquared.Models
 
         public System.Data.Entity.DbSet<EventSquared.Models.newEventViewModel> newEventViewModels { get; set; }
 
-        public System.Data.Entity.DbSet<EventSquared.Models.eventDetailsViewModel> eventDetailsViewModels { get; set; }
+        public System.Data.Entity.DbSet<EventSquared.Models.detailsEventViewModel> detailsEventViewModels { get; set; }
     }
 }

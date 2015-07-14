@@ -7,15 +7,7 @@ using System.Web;
 
 namespace EventSquared.Models
 {
-    public class allEventViewModel
-    {
-        public IEnumerable<Event> yourEvents { get; set; }
-        public IEnumerable<Event> subscribedEvents { get; set; }
-        public IEnumerable<Square> allSquares { get; set; }
-        public IEnumerable<Square> yourSquares { get; set; }
-    }
-    
-    public class newEventViewModel
+        public class newEventViewModel
     {
         [DisplayName("Date")]
         [Required]
@@ -51,7 +43,7 @@ namespace EventSquared.Models
         public int Id { get; set; }
     }
 
-    public class eventDetailsViewModel
+    public class detailsEventViewModel
     {
         public int Id { get; set; }
 

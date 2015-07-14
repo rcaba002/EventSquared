@@ -26,8 +26,8 @@ namespace EventSquared.Migrations
             {
                 FirstName = "Rob",
                 LastName = "Cabardo",
-                UserName = "email@Example.com",
-                Email = "email@Example.com",
+                UserName = "rcabardo@Example.com",
+                Email = "rcabardo@Example.com",
                 PhoneNumber = "314-555-1234",
                 EmailConfirmed = true,
                 Address = new Address { 
@@ -77,7 +77,7 @@ namespace EventSquared.Migrations
             context.Squares.Add(new Square
             {
                 Title = "Dancing",
-                CurrentTime = new DateTime(2015, 7, 14, 13, 11, 30),
+                CurrentTime = new DateTime(2015, 7, 12, 13, 11, 30),
                 StartTime = new DateTime(2015, 7, 17, 9, 0, 0),
                 EndTime = new DateTime(2015, 7, 17, 11, 0, 0),
                 ApplicationUserId = user.Id,

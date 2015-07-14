@@ -1,11 +1,6 @@
-﻿@model EventSquared.Models.allEventViewModel
+﻿@model EventSquared.Models.allViewModel
 @using Microsoft.AspNet.Identity
 @using EventSquared.Models
-
-<head>
-    <title>Event² - @ViewBag.Title</title>
-    @Styles.Render("~/Content/specificpage.css")
-</head>
 
 @{
     ViewBag.Title = "Dashboard";
@@ -26,7 +21,7 @@
         </div>
     }
 
-    <div style="display:inline-block">
+    <div style="display:inline-block; width:100%">
         <h2>Subscribed To Events</h2>
 
         @foreach (var item in Model.subscribedEvents)

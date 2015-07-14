@@ -1,36 +1,20 @@
-﻿@model EventSquared.Models.allEventViewModel
-
-<head>
-    <title>Event² - @ViewBag.Title</title>
-    @Styles.Render("~/Content/specificpage.css")
-</head>
+﻿@model EventSquared.Models.allViewModel
+@using Microsoft.AspNet.Identity
+@using EventSquared.Models
 
 @{
-    ViewBag.Title = "Your Events";
+    ViewBag.Title = "Your Squares";
 }
 
 <div class="col-md-8 nopad">
-    @*<h2>Your Events</h2>
-
-    @foreach (var item in Model.yourEvents)
-    {
-        <div class="eventBox">
-            <div class="eventBox_date"><b style="color:#D3622A">For</b> @Html.DisplayFor(modelItem => item.StartDate)</div>
-            <div class="eventBox_title">@Html.DisplayFor(modelItem => item.Title)</div>
-            <div class="eventBox_dtitle">@Html.DisplayNameFor(model => item.Description)</div>
-            <div class="eventBox_description">@Html.DisplayFor(modelItem => item.Description)</div>
-            <div>@Html.ActionLink("Details", "Details", new { id = item.Id }, new { @class = "btn-primary btn-new eventBox_btn" })</div>
-        </div>
-    }*@
-
     <div style="display:inline-block">
         <h2>Your Squares</h2>
 
         @foreach (var item in Model.yourSquares)
         {
-            <div class="eventBox">
-                <div class="squareBox_youretitle">@Html.DisplayFor(modelItem => item.Event.Title)</div>
-                <div class="squareBox_yourtitle">Square: @Html.DisplayFor(modelItem => item.Title)</div>
+            <div class="squareBox1">
+                <div class="squareBox_youretitle">Square: @Html.DisplayFor(modelItem => item.Title)</div>
+                <div class="squareBox_yourtitle">For @Html.DisplayFor(modelItem => item.Event.Title)</div>
                 <div class="squareBox_dtitle">@Html.DisplayNameFor(model => item.Description)</div>
                 <div class="squareBox_description">@Html.DisplayFor(modelItem => item.Description)</div>
                 <div>@Html.ActionLink("Details", "Details", "Squares", new { id = item.Id }, new { @class = "btn-primary btn-new eventBox_btn" })</div>

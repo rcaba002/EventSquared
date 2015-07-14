@@ -1,4 +1,4 @@
-﻿@model EventSquared.Models.eventDetailsViewModel
+﻿@model EventSquared.Models.detailsEventViewModel
 
 @{
     ViewBag.Title = "Delete Event";
@@ -75,8 +75,8 @@
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="Confirm" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "All")
+            <input type="submit" value="Confirm" class="btn btn-default" />
+            <input type="button" value="Cancel" class="btn btn-default" onclick="location.href='@Url.Action("home", "Dashboard")'" />
         </div>
     }
 </div>

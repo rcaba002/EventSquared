@@ -13,7 +13,7 @@ namespace EventSquared.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201507130712348_Init"; }
+            get { return "201507140316160_Init"; }
         }
         
         string IMigrationMetadata.Source

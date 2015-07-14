@@ -15,10 +15,10 @@ namespace EventSquared.Controllers
         // GET: Dashboard
         public ActionResult home()
         {
-            var model = new allEventViewModel
+            var model = new allViewModel
             {
-                yourEvents = db.Events.ToList().Where(x => x.ApplicationUserId == User.Identity.GetUserId()),
-                subscribedEvents = db.Events.ToList().Where(x => x.ApplicationUserId != User.Identity.GetUserId()),
+                yourEvents = db.Events.OrderBy(x => x.StartDate).ToList().Where(x => x.ApplicationUserId == User.Identity.GetUserId()),
+                subscribedEvents = db.Events.OrderBy(x => x.StartDate).ToList().Where(x => x.ApplicationUserId != User.Identity.GetUserId()),
                 allSquares = db.Squares.OrderByDescending(x => x.CurrentTime).ToList()
             };
 
